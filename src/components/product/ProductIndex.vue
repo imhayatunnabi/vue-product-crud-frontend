@@ -3,9 +3,7 @@
         <h3 class="text-center text-primary mt-5">Product List</h3>
     </div>
     <div class="container">
-    <button class="btn btn-primary">
-    <router-link to="/create">Create Product</router-link>
-    </button>
+    <router-link to="/product/create" class="btn btn-primary">Create Product</router-link>
     </div>
     <div class="container mt-5">
         <div class="table-responsive">
@@ -23,7 +21,11 @@
                         <td>{{ item.id }}</td>
                         <td>{{ item.product_name }}</td>
                         <td>{{ item.product_description }}</td>
-                        <td>{{ item.product_description }}</td>
+                        <td>
+                        <router-link :to="{ name: 'ProductEdit', params: { id: item.id } }" class="btn btn-primary">
+                          Edit
+                        </router-link>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -32,9 +34,11 @@
     </div>
 </template>
 <script>
+
+
 import axios from 'axios';
 const apiClient = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api' // Update this to the base URL of your API
+  baseURL: 'http://127.0.0.1:8000/api'
 });
 export default {
   data() {

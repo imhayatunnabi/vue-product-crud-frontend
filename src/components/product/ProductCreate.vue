@@ -18,7 +18,6 @@
 </template>
 <script>
 import axios from 'axios';
-
 export default {
   data() {
     return {
@@ -28,13 +27,13 @@ export default {
   },
   methods: {
     submitForm() {
-      axios.post(`${process.env.url}/product/store`, {
+      axios.post('http://127.0.0.1:8000/api/product/product-submit', {
         product_name: this.product_name,
         product_description: this.product_description
       })
       .then(response => {
           console.log(response.data);
-                  this.$router.push({ name: 'ProductIndex' });
+                  this.$router.push({ name: 'Home' });
       })
       .catch(error => {
         console.log(error);
