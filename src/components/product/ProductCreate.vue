@@ -7,10 +7,12 @@
     <div class="mb-3">
       <label for="product_name" class="form-label">Product Name</label>
       <input type="text" class="form-control" id="product_name" v-model="product_name">
+            <span v-if="errors.product_name" class="error">{{ errors.product_name[0] }}</span>
     </div>
     <div class="mb-3">
       <label for="product_description" class="form-label">Product Description</label>
       <input type="text" class="form-control" id="product_description" v-model="product_description">
+      <span v-if="errors.product_description" class="error">{{ errors.product_description[0] }}</span>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
@@ -22,7 +24,8 @@ export default {
   data() {
     return {
       product_name: '',
-      product_description: ''
+      product_description: '',
+      errors: {},
     }
   },
   methods: {
@@ -35,10 +38,17 @@ export default {
           console.log(response.data);
                   this.$router.push({ name: 'Home' });
       })
-      .catch(error => {
-        console.log(error);
+        .catch(error => {
+        this.errors = error.response.data.errors
+        console.log(this.errors);
       });
     }
   }
 }
 </script>
+<style scoped>
+.error {
+  color: red;
+  margin-top: 10px;
+}
+</style>
