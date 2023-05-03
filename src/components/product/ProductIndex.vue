@@ -25,6 +25,9 @@
                         <router-link :to="{ name: 'ProductEdit', params: { id: item.id } }" class="btn btn-primary">
                           Edit
                         </router-link>
+                        <button type="button" class="btn btn-danger" @click="deleteProduct(item.id)">
+                        Delete
+                        </button>
                         </td>
                     </tr>
                 </tbody>
@@ -45,6 +48,16 @@ export default {
     return {
       items: []
     };
+  },methods: {
+    deleteProduct(id) {
+      axios.get(`http://127.0.0.1:8000/api/product/delete/${id}`).then((result) => {
+        this.items = this.items.filter(item => item.id !== id)
+        console.log(result);
+      }).catch((err) => {
+        console.log(err);
+      });
+      console.log(id);
+    }
   },
   created() {
     apiClient.get('/product/index')
