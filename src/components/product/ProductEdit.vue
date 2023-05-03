@@ -35,6 +35,14 @@ export default {
             }).catch((err) => {
                 console.log(err);
             });
+        },updateProduct() {
+            axios.put(`http://127.0.0.1:8000/api/product/update/${this.$route.params.id}`, this.product)
+                .then((result) => {
+                    console.log(result);
+                    this.$router.push({ name: 'Home' });
+                }).catch((err) => {
+                    console.log(err);
+                });
         }
     },
 }
