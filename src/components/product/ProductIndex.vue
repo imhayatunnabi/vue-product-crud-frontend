@@ -39,10 +39,7 @@
 <script>
 
 
-import axios from 'axios';
-const apiClient = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api'
-});
+import axios from '../../../axios.js';
 export default {
   data() {
     return {
@@ -50,7 +47,7 @@ export default {
     };
   },methods: {
     deleteProduct(id) {
-      axios.get(`http://127.0.0.1:8000/api/product/delete/${id}`).then((result) => {
+      axios.get(`/product/delete/${id}`).then((result) => {
         this.items = this.items.filter(item => item.id !== id)
         console.log(result);
       }).catch((err) => {
@@ -60,7 +57,7 @@ export default {
     }
   },
   created() {
-    apiClient.get('/product/index')
+    axios.get('/product/index')
       .then(response => {
           this.items = response.data.data;
       })

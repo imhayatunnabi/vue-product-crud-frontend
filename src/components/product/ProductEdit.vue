@@ -17,7 +17,7 @@
     </div>
 </template>
 <script>
-import axios from 'axios';
+import axios from '../../../axios.js';
 export default {
     data() {
         return {
@@ -29,14 +29,14 @@ export default {
     },
     methods: {
         getProduct() {
-            axios.get(`http://127.0.0.1:8000/api/product/show/${this.$route.params.id}`).then((result) => {
+            axios.get(`/product/show/${this.$route.params.id}`).then((result) => {
                 this.product = result.data.data
                 console.log(this.product);
             }).catch((err) => {
                 console.log(err);
             });
         },updateProduct() {
-            axios.put(`http://127.0.0.1:8000/api/product/update/${this.$route.params.id}`, this.product)
+            axios.put(`/api/product/update/${this.$route.params.id}`, this.product)
                 .then((result) => {
                     console.log(result);
                     this.$router.push({ name: 'Home' });
